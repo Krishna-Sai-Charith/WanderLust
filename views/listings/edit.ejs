@@ -1,0 +1,75 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<div class="row mt-5">
+    <div class="col-8 offset-2">
+        <h3>Edit your Listing</h3>
+        <form action="/listings/<%= singleListing._id %>?_method=PUT" method="POST" novalidate class="needs-validation">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="listing[title]" value="<%= singleListing.title %>" placeholder="enter title" class="form-control" required>
+                <div class="invalid-feedback">
+                    Please provide a valid title.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="text" name="listing[image]" value="<%= singleListing.image %>" class="form-control" required>
+                <div class="invalid-feedback">
+                    Please provide a valid image URL.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="listing[description]" class="form-control" required><%= singleListing.description %></textarea>
+                <div class="invalid-feedback">
+                    Please provide a valid description.
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" name="listing[price]" value="<%= singleListing.price %>" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid price.
+                    </div>
+                </div>
+                <div class="mb-3 col-md-8">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" name="listing[country]" value="<%= singleListing.country %>" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid country.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" name="listing[location]" value="<%= singleListing.location %>" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid location.
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-dark edit-btn">Update</button>
+        </form>
+    </div>
+</div>
+<script src="/js/script.js"></script>
+<!-- Include Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fetch the form we want to apply custom Bootstrap validation styles to
+        var form = document.querySelector('.needs-validation');
+        
+        // Loop over them and prevent submission
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+</script>
